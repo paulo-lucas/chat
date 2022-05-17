@@ -35,7 +35,7 @@ export class SignupComponent {
         );
 
         this.authService.signUpUser(userAux).subscribe(
-            (sucess) => {
+            (sucess: any) => {
                 this.saveSuccess = true;
                 this.sucessMessage = `${sucess.message}`;
                 window.setTimeout(function () {

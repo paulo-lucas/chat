@@ -7,7 +7,7 @@ const { isValidToken } = require('../middlewares/auth')
 
 router.post('/', isValidToken, async function (req, res, next) {
     const { content } = req.body
-    const user = await User.findOne({ id: req.userId })
+    const user = await User.findOne({ _id: req.userId })
     const message = new Message({
         content,
         user
@@ -29,10 +29,7 @@ router.post('/', isValidToken, async function (req, res, next) {
 
 router.get('/', isValidToken, function (req, res, next) {
     Message.find()
-        .populate({
-            path: 'user',
-            model: User,
-        })
+        .populate('user')
         .exec(async function (err, result) {
             if (err) {
                 return res.status(500).json({
@@ -40,17 +37,6 @@ router.get('/', isValidToken, function (req, res, next) {
                     myError: err
                 })
             }
-
-            console.log(result)
-
-            const parsedResult = result.map(item => ({
-                _id: item._id,
-                id: item.id,
-                content: item.content,
-                user: item.user.firstName
-            }))
-
-            console.log(parsedResult)
 
             res.status(200).json({
                 myMsgSucess: "Sucess find message!",

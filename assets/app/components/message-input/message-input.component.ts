@@ -18,7 +18,6 @@ export class MessageInputComponent {
         this.messageService.addMessage(messageAux)
             .subscribe(
                 sucess => {
-                    document.location.reload();
                 },
                 error => console.log(error)
             );
