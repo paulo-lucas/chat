@@ -1,0 +1,72 @@
+<h3 class="mb-4 pb-3" style="color: #fff">Sign Up</h3>
+<form (ngSubmit)="onSubmit(refLocalForm)" #refLocalForm="ngForm" ngNativeValidate>
+    <div class="form-group">
+        <input type="text" name="firstName" class="form-style" ngModel placeholder="First Name" id="firstName"
+            autocomplete="off">
+        <span class="input-icon uil iconify" data-icon="ant-design:user-add-outlined"></span>
+    </div>
+    <div class="form-group mt-2">
+        <input type="text" name="lastName" class="form-style" ngModel placeholder="Last Name" id="lastName"
+            autocomplete="off">
+        <span class="input-icon uil iconify" data-icon="ant-design:user-delete-outlined"></span>
+    </div>
+    <div class="form-group mt-2">
+        <input type="email" name="email" class="form-style" ngModel placeholder="E-mail" id="email" autocomplete="off">
+        <i class="input-icon uil uil-at bi-at"></i>
+    </div>
+    <div class="form-group mt-2">
+        <input type="password" name="password" class="form-style" ngModel placeholder="Password" id="password"
+            autocomplete="off">
+        <span class="input-icon uil uil-at iconify" data-icon="uil:lock-alt"></span>
+    </div>
+    <div class="form-group mt-2">
+        <span class="input-icon uil uil-at iconify" data-icon="icon-park-outline:city"></span>
+        <select class="form-style" style=" width: 100%; " aria-label=".form-select-sm example" name=" valueCheck"
+            (change)="valueChange($event)" id="te">
+            <option selected disabled hidden>
+                <p>Country</p>
+            </option>
+
+            <option *ngFor="let country of countrys" [value]="country">{{
+                country }}</option>
+        </select>
+    </div>
+    <div class="from-group" style="margin: 12px 12px 6px 0px">
+        <div class="d-flex column justify-content-center">
+            <div class="form-check" style="margin-right: 40px;">
+                <input class="form-check-input" type="radio" value="Male" id="male" name="gender"
+                    style="width: 20px;height: 20px;margin-top: 15px; background-color: #302e3f;border-color: #4c3e10;"
+                    ngModel>
+                <label class="form-check-label" for="male" style="color: #fff;font-size: 20px;margin-left: 0px;">
+                    <div class="form-group" style="width: 20px;height: 18px;">
+                        <span class="input-icon uil uil-at iconify" data-icon="et:profile-male"></span>
+                    </div>
+                </label>
+            </div>
+            <div class="form-check" style="margin-right: 2px;">
+                <input class="form-check-input" type="radio" value="Female" name="gender"
+                    style="width: 20px;height: 20px;margin-top: 15px;background-color: #302e3f; border-color: #4c3e10;"
+                    id="female" ngModel>
+                <label class="form-check-label" for="female" style="color: #fff;font-size: 20px;margin-left: 0px;">
+                    <div class="form-group" style="width: 20px;height: 18px;">
+                        <span class="input-icon uil uil-at iconify" data-icon="et:profile-female"></span>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <button href="#" class="btn mt-4" style="background-color: #ffeba7;" type="submit"
+        data-dismiss="alert">submit</button>
+    <div class="alert alert-success alert-dismissible fade show" style="margin-top: 40px;"
+        style="margin-top: 30px;margin-bottom: 20px;" *ngIf="saveSuccess">
+        <strong>Success!</strong>{{sucessMessage}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show"
+        style="margin-top: 30px;margin-bottom: 20px;" *ngIf="errorSuccess" dismissOnTimeout="2000">
+        <i class="bi-exclamation-octagon-fill"></i>
+        <strong class="mx-2">Error!</strong> {{errorMessage}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+<div class="card-front">
+    <div class="center-wrap">
+        <div class="section text-center">
+            <h3 class="mb-4 pb-3" style="color: #fff; margin-bottom: 20px">Log In</h3>
+            <form (ngSubmit)="onSubmit(refLocalForm)" #refLocalForm="ngForm" ngNativeValidate>
+                <div class="form-group" style="margin-top: 20px">
+                    <input type="email" name="email" [(ngModel)]="form.email" class="form-style" placeholder="E-mail"
+                        id="logemail" autocomplete="off" #email="ngModel" />
+                    <i class="input-icon uil uil-at bi-at"></i>
+                </div>
+                <div class="form-group mt-2" style="margin-bottom: 30px">
+                    <input type="password" name="password" [(ngModel)]="form.password" class="form-style"
+                        placeholder="Password" id="logpass" autocomplete="off" #password="ngModel" />
+
+                    <span class="input-icon uil uil-at iconify" data-icon="uil:lock-alt"></span>
+                </div>
+                <button href="#" class="btn" style="margin-top: 30px">submit</button>
+                <p class="mb-0 mt-4 text-center">
+                    <a href="#0" class="link">Forgot your password?</a>
+                </p>
+                <div class="alert alert-success alert-dismissible fade show" style="margin-top: 40px"
+                    style="margin-top: 30px; margin-bottom: 20px" *ngIf="saveSuccess">
+                    <strong>Success!</strong>{{ sucessMessage }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show"
+                    style="margin-top: 30px; margin-bottom: 20px" *ngIf="errorSuccess">
+                    <i class="bi-exclamation-octagon-fill"></i>
+                    <strong class="mx-2">Error!</strong> {{ errorMessage }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

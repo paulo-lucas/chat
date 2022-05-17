@@ -1,0 +1,17 @@
+<div class="h-100 row align-items-center flex-nowrap">
+    <div class="d-flex flex-nowrap justify-content-center">
+        <div class="d-flex flex-nowrap justify-content-center" id="mainMenu">
+            <form (ngSubmit)="onSubmit(refLocalForm)" #refLocalForm="ngForm" ngNativeValidate>
+                <div class="from-group">
+                    <div class="d-flex column justify-content-center" style="margin-bottom: 20px;">
+                        <input type="text" id="myContentngForm" class="form-control" placeholder="Message" ngModel
+                            name="myContentngForm" required>
+                        <button type="submit" class="btn" style="margin: 0px 0px 0px 10px; background-color: #070861;">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
