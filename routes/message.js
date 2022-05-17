@@ -5,7 +5,7 @@ const User = require('../models/user');
 
 const { isValidToken } = require('../middlewares/auth')
 
-router.post('/', isValidToken, async function (req, res, next){
+router.post('/', isValidToken, async function (req, res, next) {
     const { content } = req.body
     const user = await User.findOne({ id: req.userId })
     const message = new Message({
@@ -13,8 +13,8 @@ router.post('/', isValidToken, async function (req, res, next){
         user
     });
 
-    message.save(function(err, result){
-        if(err){
+    message.save(function (err, result) {
+        if (err) {
             return res.status(500).json({
                 myErroTitle: 'Error save!',
                 myError: err
@@ -27,15 +27,31 @@ router.post('/', isValidToken, async function (req, res, next){
     });
 });
 
-router.get('/', isValidToken, function(req, res, next){
+router.get('/', isValidToken, function (req, res, next) {
     Message.find()
-        .exec(function(err, result){
-            if(err){
+        .populate({
+            path: 'user',
+            model: User,
+        })
+        .exec(async function (err, result) {
+            if (err) {
                 return res.status(500).json({
                     myErroTitle: 'Error find!',
                     myError: err
                 })
             }
+
+            console.log(result)
+
+            const parsedResult = result.map(item => ({
+                _id: item._id,
+                id: item.id,
+                content: item.content,
+                user: item.user.firstName
+            }))
+
+            console.log(parsedResult)
+
             res.status(200).json({
                 myMsgSucess: "Sucess find message!",
                 objMessagesFind: result
@@ -43,9 +59,9 @@ router.get('/', isValidToken, function(req, res, next){
         });
 })
 
-router.delete('/', isValidToken, function(req, res, next){
+router.delete('/', isValidToken, function (req, res, next) {
     Message.findByIdAndRemove(req.query.id, (err, data) => {
-        if(err){ return next(err)}
+        if (err) { return next(err) }
         res.status(200).json({
             myMsgSucess: "Sucess remove message!",
             msg: data
@@ -53,10 +69,10 @@ router.delete('/', isValidToken, function(req, res, next){
     })
 })
 
-router.put('/', isValidToken, function(req, res, next){
-    Message.findByIdAndUpdate({_id: req.query.id}, {$set: { content: req.body.content}}, { new: true }, (err, data) => {
-        if(err){ return next(err)}
-      
+router.put('/', isValidToken, function (req, res, next) {
+    Message.findByIdAndUpdate({ _id: req.query.id }, { $set: { content: req.body.content } }, { new: true }, (err, data) => {
+        if (err) { return next(err) }
+
         res.status(200).json({
             myMsgSucess: "Sucess update message!",
             msg: data
